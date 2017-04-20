@@ -20,15 +20,15 @@ object HWData {
     val data = reader.allWithHeaders()
     reader.close()
 
-    def toDouble(s:String): Option[Double] = {
+    def toDouble(s:String): Double = {
       import scala.util.Try
-      Try(s.toDouble).toOption
+      Try(s.toDouble).toOption getOrElse Double.NaN
     }
     val genders = fromList(data, "sex", _.replace("\"", "").head)
     val weights = fromList(data, "weight", _.toDouble)
     val heights = fromList(data, "height", _.toDouble)
-    val reportedWeights = fromList(data, "repwt", toDouble(_) getOrElse 0.0)
-    val reportedHeights = fromList(data, "repht", toDouble(_) getOrElse 0.0)
+    val reportedWeights = fromList(data, "repwt", toDouble(_))
+    val reportedHeights = fromList(data, "repht", toDouble(_))
 
     HWData(weights, heights, reportedWeights, reportedHeights, genders)
   }
