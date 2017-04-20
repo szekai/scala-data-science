@@ -8,7 +8,11 @@ libraryDependencies  ++= breeze_lib ++ Seq(
 
   "com.github.tototoshi" %% "scala-csv" % "latest.integration",
 
-  "org.scala-saddle" %% "saddle-core" % "1.3.+"
+  "org.scala-saddle" %% "saddle-core" % "1.3.+",
+
+  "org.slf4j" % "slf4j-nop" % "1.7.5",
+
+  "org.scala-lang" % "scala-xml" % "latest.integration"
 )
 
 lazy val breeze_lib =  Seq(
