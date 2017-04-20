@@ -1,11 +1,11 @@
 package sky
 
-import org.saddle.{Frame, Mat, Panel, Vec, vec}
 import org.saddle.io.{CsvFile, CsvParser}
+import org.saddle.{Mat, Vec, vec}
 
 object SDData {
 
-  def load(s:String): SDData ={
+  def load(s: String): SDData = {
     val file = CsvFile(s)
     val frame = CsvParser.parse()(file).withRowIndex(0).withColIndex(0)
 
@@ -20,32 +20,23 @@ object SDData {
 }
 
 case class SDData(
-                   weights:Vec[Double],
-                   heights:Vec[Double],
-                   reportedWeights:Vec[Double],
-                   reportedHeights:Vec[Double],
-                   genders:Vec[Char]
+                   weights: Vec[Double],
+                   heights: Vec[Double],
+                   reportedWeights: Vec[Double],
+                   reportedHeights: Vec[Double],
+                   genders: Vec[Char]
                  ) {
 
-  val npoints = heights.length
+  lazy val rescaledHeights: Vec[Double] = (heights - heights.mean) / heights.stdev
   require(weights.length == npoints)
   require(reportedWeights.length == npoints)
   require(genders.length == npoints)
   require(reportedHeights.length == npoints)
+  lazy val rescaledWeights: Vec[Double] = (weights - weights.mean) / weights.stdev
+  lazy val featureMatrix: Mat[Double] = Mat(vec.ones(npoints), rescaledHeights, rescaledWeights)
+  lazy val target: Vec[Double] = genders.values.map { gender => if (gender == 'M') 1.0 else 0.0 }
+  val npoints:Int = heights.length
 
-  lazy val rescaledHeights:Vec[Double] =
-    (heights - heights.mean) / heights.stdev
-
-  lazy val rescaledWeights:Vec[Double] =
-    (weights - weights.mean) / weights.stdev
-
-  lazy val featureMatrix:Mat[Double] =
-    Mat(vec.ones(npoints),rescaledHeights,rescaledWeights)
-
-
-  lazy val target:Vec[Double] =
-    genders.values.map { gender => if(gender == 'M') 1.0 else 0.0 }
-
-  override def toString:String = s"HWData [ $npoints rows ]"
+  override def toString: String = s"HWData [ $npoints rows ]"
 
 }
