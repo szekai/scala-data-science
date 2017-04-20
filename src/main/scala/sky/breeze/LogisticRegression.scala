@@ -15,9 +15,14 @@ class LogisticRegression(
     sigmoid(xBeta)
   }
 
-  def predictMany(featureMatrix: DenseMatrix[Double]): DenseVector[Double] = {
-    val xBeta = featureMatrix * optimalCoefficients
+  def predictProbabilitiesMany(test:DenseMatrix[Double]):DenseVector[Double] = {
+    val xBeta = test * optimalCoefficients
     sigmoid(xBeta)
+  }
+
+  def classifyMany(test:DenseMatrix[Double]):DenseVector[Double] = {
+    val probabilities = predictProbabilitiesMany(test)
+    I((probabilities >:> 0.5).toDenseVector)
   }
 
   private def calculateOptimalCoefficients: DenseVector[Double] = {

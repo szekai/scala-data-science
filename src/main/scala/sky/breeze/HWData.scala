@@ -25,10 +25,10 @@ object HWData {
       Try(s.toDouble).toOption getOrElse Double.NaN
     }
     val genders = fromList(data, "sex", _.replace("\"", "").head)
-    val weights = fromList(data, "weight", _.toDouble)
-    val heights = fromList(data, "height", _.toDouble)
-    val reportedWeights = fromList(data, "repwt", toDouble(_))
-    val reportedHeights = fromList(data, "repht", toDouble(_))
+    val weights = fromList(data, "weight", toDouble)
+    val heights = fromList(data, "height", toDouble)
+    val reportedWeights = fromList(data, "repwt", toDouble)
+    val reportedHeights = fromList(data, "repht", toDouble)
 
     HWData(weights, heights, reportedWeights, reportedHeights, genders)
   }
