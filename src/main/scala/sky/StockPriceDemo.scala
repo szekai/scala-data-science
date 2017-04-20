@@ -8,13 +8,13 @@ import scala.util._
 
 object StockPriceDemo extends App {
 
-  def urlFor(stockSymbol:String) = (
-    "http://dev.markitondemand.com/MODApis/Api/v2/Quote?" +
-      s"symbol=${stockSymbol}")
+  def urlFor(stockSymbol: String) = s"http://dev.markitondemand.com/MODApis/Api/v2/Quote?symbol=$stockSymbol"
 
-  def fetchStockPrice(stockSymbol:String):Future[BigDecimal] = {
+  def fetchStockPrice(stockSymbol: String): Future[BigDecimal] = {
     val url = urlFor(stockSymbol)
-    val strResponse = Future { Source.fromURL(url).mkString }
+    val strResponse = Future {
+      Source.fromURL(url).mkString
+    }
     val xmlResponse = strResponse.map { s => XML.loadString(s) }
     val price = xmlResponse.map { r => BigDecimal((r \ "LastPrice").text) }
     price
@@ -22,7 +22,7 @@ object StockPriceDemo extends App {
 
   println("Enter symbol at prompt.")
   while (true) {
-    val symbol = readLine("> ")
+    val symbol = StdIn.readLine("> ")
     fetchStockPrice(symbol).onComplete { future =>
       println()
       future match {
@@ -32,3 +32,4 @@ object StockPriceDemo extends App {
       print("> ")
     }
   }
+}
