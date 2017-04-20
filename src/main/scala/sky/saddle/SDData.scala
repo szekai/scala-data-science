@@ -5,8 +5,8 @@ import org.saddle.{Mat, Vec, vec}
 
 object SDData {
 
-  def load(s: String): SDData = {
-    val file = CsvFile(s)
+  def load(implicit filePath: String): SDData = {
+    val file = CsvFile(filePath)
     val frame = CsvParser.parse()(file).withRowIndex(0).withColIndex(0)
 
     val genders = frame.col("sex").mapValues(_.replace("\"", "").head).colAt(0).values

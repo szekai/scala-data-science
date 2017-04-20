@@ -12,7 +12,9 @@ libraryDependencies  ++= breeze_lib ++ Seq(
 
   "org.slf4j" % "slf4j-nop" % "1.7.5",
 
-  "org.scala-lang" % "scala-xml" % "latest.integration"
+  "org.scala-lang" % "scala-xml" % "latest.integration",
+
+  "mysql" % "mysql-connector-java" % "5.1.35"
 )
 
 lazy val breeze_lib =  Seq(

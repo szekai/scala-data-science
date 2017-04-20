@@ -5,11 +5,10 @@ import org.saddle.Mat
 import sky.breeze.ScatterplotMatrix
 
 object SScatterplotMatrixDemo{
-  val DataDirectory = "data/"
-  val fileName = "Davis.csv"
+  implicit val filePath = "data/Davis.csv"
 
   def main(args:Array[String]): Unit ={
-    val data = SDData.load(DataDirectory + fileName)
+    val data = SDData.load
     val fig = Figure("Scatterplot matrix demo")
     val m = new ScatterplotMatrix(fig)
     // Make a matrix with three columns: the height, weight and
