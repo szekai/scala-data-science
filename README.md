@@ -1,6 +1,26 @@
 # scala-data-science
 Combine breeze and saddle
 
+ * `HWData.scala`: helper routines for loading the height-weight data from CSVs.
+ * `LogisticRegression.scala`: Re-usable Scala class implementing logistic regression.
+ * `LogisticRegressionDemo.scala`: Example run for the Logistic regression class.
+ * `BreezeDemo.scala`: Example code for plotting simple x-y plots, scatter plots (including scatter plots with variable point size and color), as well as multiple plots on one figure.
+ * `ScatterplotMatrix.scala` contains a class for plotting [scatterplot matrices](http://www.utexas.edu/courses/schwab/sw388r7/Tutorials/IllustrationofRegressionAnalysis_doc_html/024_The_Scatterplot_Matrix.html). Run `ScatterPlotMatrixDemo` to see this in action.
+
+
+## Parallel collections
+
+Some of the code examples rely on the same height-weight data that was presented in chapter 2.
+
+ - `LogisticRegression.scala`: an extension of the `LogisticRegression` class written in chapter 2 that also contains `predictProbabilitiesMany` and `classifyMany` methods for generating predictions on a test set.
+ - `HWData.scala`: routines for loading the height-weight data from CSVs.
+ - `RandomSubsample.scala`: class to perform random subsample cross-validation in parallel using a parallel range.
+ - `RandomSubsampleDemo.scala`: Demonstration program showing how to use the `RandomSubsample` class.
+
+## Futures
+
+ - `BlockDemo.scala`: simple program demonstrating how to block to await the completion of a future.
+ - `StockPriceDemo.scala`: Simple command line application for fetching stock prices from the [Markit on demand](http://dev.markitondemand.com/MODApis/) API. Stock prices are fetched asynchronously to avoid blocking the user interface.
 
 ## Model classes
 

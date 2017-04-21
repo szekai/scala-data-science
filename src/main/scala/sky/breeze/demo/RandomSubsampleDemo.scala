@@ -1,6 +1,5 @@
 package sky.breeze.demo
 
-import breeze.linalg._
 import breeze.linalg.functions.manhattanDistance
 import breeze.stats._
 import sky.breeze.{HWData, LogisticRegression, RandomSubsample}
@@ -10,22 +9,6 @@ object RandomSubsampleDemo extends App {
   val fileName = "Davis.csv"
   /* Load and pre-process data */
   val data = HWData.load(DataDirectory + fileName)
-
-  val rescaledHeights:DenseVector[Double] =
-    (data.heights - mean(data.heights)) / stddev(data.heights)
-
-  val rescaledWeights:DenseVector[Double] =
-    (data.weights - mean(data.weights)) / stddev(data.weights)
-
-  val featureMatrix:DenseMatrix[Double] =
-    DenseMatrix.horzcat(
-      DenseMatrix.ones[Double](data.npoints, 1),
-      rescaledHeights.toDenseMatrix.t,
-      rescaledWeights.toDenseMatrix.t
-    )
-
-  val target:DenseVector[Double] =
-    data.genders.values.map { gender => if(gender == 'M') 1.0 else 0.0 }
 
   /* Cross-validation */
   val testSize = 20

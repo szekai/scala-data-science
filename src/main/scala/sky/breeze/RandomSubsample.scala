@@ -1,7 +1,6 @@
 package sky.breeze
 
 import breeze.linalg._
-import breeze.numerics._
 
 class RandomSubsample(val nElems:Int, val nCrossValidation:Int) {
 
