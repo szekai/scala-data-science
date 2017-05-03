@@ -12,7 +12,8 @@ libraryDependencies  ++= breeze_lib ++ dao_lib ++ Seq(
 
   "org.slf4j" % "slf4j-nop" % "1.7.5",
 
-  "org.scala-lang" % "scala-xml" % "latest.integration"
+  "org.scala-lang" % "scala-xml" % "latest.integration",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 
 )
 
@@ -29,6 +30,7 @@ lazy val breeze_lib =  Seq(
   // The visualization library is distributed separately as well.
   // It depends on LGPL code
   "org.scalanlp" %% "breeze-viz" % "0.13"
+
 )
 
 lazy val dao_lib = Seq(
@@ -36,5 +38,8 @@ lazy val dao_lib = Seq(
 
   "mysql" % "mysql-connector-java" % "5.1.35",
 
-  "com.typesafe.slick" %% "slick" % "latest.integration"
+  "com.typesafe.slick" %% "slick" % "3.2.0",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.0"
 )
+
+fork in run := true
